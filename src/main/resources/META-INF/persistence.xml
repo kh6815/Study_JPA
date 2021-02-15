@@ -8,14 +8,22 @@
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/jpashop"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
             <!-- 옵션 -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
-            <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+            <property name="hibernate.hbm2ddl.auto" value="create" /><!-- 데이터베이스 스키마 자동 생성 실행되면 먼저 이전 스키마를 지우고 새로 만듬. -->
+            <!-- auto의 종류에는 create(처음에 drop하고 시작), create-drop(처음과 종료시점에 drop), update(변경분만 반영(운영DB에는 사용X), 삭제하지않고 테이블에 칼럼 반영)
+            , validate(엔티티와 테이블이 정상 매핑되었는지만 확인)-->
+            <!-- auto 자동생성 사용시 주의
+                - 운영 장비에는 절대 create, create-drop, update사용하면 안된다.
+                - 개발 초기단계는 create 또는 update
+                - 테스트 서버는 update 또는 validate
+                - 스테이징과 운영 서버는 validate 또는 none을 사용해야 한다.
+             -->
         </properties>
     </persistence-unit>
 </persistence>
